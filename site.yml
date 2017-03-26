@@ -4,6 +4,7 @@
   hosts: all
   roles:
   - common
+  - apt
   - ntp
 
 - name: Setup gateway servers
