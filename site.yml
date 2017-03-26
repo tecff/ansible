@@ -11,6 +11,7 @@
   hosts: gw31.regensburg.freifunk.net
   roles:
   - fastd
+  - dns
 
 - name: Setup confluence server
   hosts: confluence.regensburg.freifunk.net

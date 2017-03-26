@@ -1,3 +1,6 @@
 ---
 
+batman_ipv4:
+  address: 10.90.32.21
+
 site_code: ffrgb_umland
