@@ -1,0 +1,24 @@
+---
+
+- name: Install misc software
+  apt: name={{ item }} state=present
+  with_items:
+  - dnsutils
+  - htop
+  - openssl
+  - pydf
+  - rsync
+  - sudo
+  - vim-nox
+  - zsh
+
+- name: Configure misc software
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+  - { src: '.zshrc', dest: '/root/.zshrc' }
+  - { src: '.zshrc.local', dest: '/root/.zshrc.local' }
+  - { src: 'motd', dest: '/etc/motd' }
+  - { src: 'prompt_gentoo_setup', dest: '/usr/share/zsh/functions/Prompts/prompt_gentoo_setup' }
+
+- name: Set shell for root user
+  user: name=root shell=/bin/zsh
