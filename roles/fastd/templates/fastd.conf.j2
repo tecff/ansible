@@ -1,0 +1,31 @@
+# {{ ansible_managed }}
+
+log to syslog level warn;
+hide ip addresses yes;
+status socket "/run/fastd-{{ fastd_instance }}.sock";
+
+interface "{{ fastd_interface }}";
+
+method "salsa2012+umac";
+method "xsalsa20-poly1305";
+
+secure handshakes yes;
+
+bind {{ fastd_bind }}:{{ fastd_port }};
+
+include "secret.conf";
+
+mtu {{ fastd_mtu }};
+
+{% if fastd_peers_limit > -1 %}
+peer limit {{ fastd_peers_limit }};
+{% endif %}
+
+on up "ifup --allow hotplug {{ fastd_interface }}";
+on down "ifdown --allow hotplug {{ fastd_interface }}";
+
+{% if fastd_anonymous %}
+on verify "/etc/fastd/{{ site_code }}/blacklist.sh /opt/{{ site_code }}/vpn-blacklist/blacklist.json";
+{% endif %}
+
+include peers from "peers";

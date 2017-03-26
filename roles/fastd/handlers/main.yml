@@ -1,0 +1,7 @@
+---
+
+- name: Restart fastd
+  service: name=fastd@{{ site_code }} state=restarted
+
+- name: Reload systemd
+  command: systemctl daemon-reload

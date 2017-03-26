@@ -1,0 +1,34 @@
+---
+
+- name: Enable backports
+  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
+
+- name: Install fastd
+  apt: name=fastd default_release=jessie-backports state=latest
+
+- name: Install haveged (to create entropy)
+  apt: name=haveged
+
+- name: Copy systemd unit file
+  command: /bin/cp /lib/systemd/system/fastd@.service /etc/systemd/system/fastd@.service creates=/etc/systemd/system/fastd@.service
+
+- name: Fix systemd unit for fastd
+  lineinfile:
+    dest: /etc/systemd/system/fastd@.service
+    line: "ExecStopPost=/bin/rm -f /run/fastd-%I.sock"
+    regexp: "^ExecStopPost="
+    insertafter: "^ExecReload="
+  notify:
+  - Reload systemd
+  - Restart fastd
+
+- name: Create directories
+  file: path=/etc/fastd/{{ fastd_instance }}/peers state=directory
+
+- name: Configure fastd
+  template: src=fastd.conf.j2 dest=/etc/fastd/{{ fastd_instance }}/fastd.conf
+  notify: Restart fastd
+
+- name: Generate fastd secret
+  fastd_key: path=/etc/fastd/{{ site_code }}/secret.conf
+  notify: Restart fastd
