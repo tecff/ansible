@@ -5,3 +5,8 @@
   roles:
   - common
   - ntp
+
+- name: Setup confluence server
+  hosts: confluence.regensburg.freifunk.net
+  roles:
+  - confluence

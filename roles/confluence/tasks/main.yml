@@ -1,0 +1,35 @@
+---
+
+- name: Install packages
+  apt: name={{ item }} state=present
+  with_items:
+  - postgresql
+  - python-psycopg2
+
+- name: Configure PostgreSQL database
+  postgresql_db: name={{ confluence_dbname }}
+  become: true
+  become_user: postgres
+
+- name: Configure PostgreSQL user
+  postgresql_user: db={{ confluence_dbname }} name={{ confluence_dbuser }} password={{ confluence_dbpass }} priv=ALL state=present
+  become: true
+  become_user: postgres
+
+- name: Ensure certificates are available
+  command: openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/ssl/{{ confluence_domain }}.key -out /etc/nginx/ssl/{{ confluence_domain }}.crt -days 730 -subj "/CN={{ confluence_domain }}" creates=/etc/nginx/ssl/{{ confluence_domain }}.crt
+  notify: Restart nginx
+
+- name: Configure certificate manager for confluence
+  template: src=certs.j2 dest=/etc/acme/domains.d/{{ confluence_domain }}.conf
+
+- name: Configure vhost
+  template: src=vhost.j2 dest=/etc/nginx/sites-available/confluence
+  notify: Restart nginx
+
+- name: Enable vhost
+  file: src=/etc/nginx/sites-available/confluence dest=/etc/nginx/sites-enabled/confluence state=link
+  notify: Restart nginx
+
+- name: Start PostgreSQL
+  service: name=postgresql state=started enabled=yes

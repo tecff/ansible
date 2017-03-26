@@ -1,0 +1,44 @@
+---
+
+- name: Enable backports
+  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
+
+- name: Install dependencies
+  apt: name={{ item }} state=present
+  with_items:
+  - git
+  - python-dateutil
+  - python-yaml
+
+- name: Install python-openssl
+  apt: name=python-openssl default_release=jessie-backports state=latest
+
+- name: Install acertmgr
+  git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version=480337648699cfbe321774dee1d8aa82eb27b626
+
+- name: Create config directories
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+  - /etc/acme
+  - /etc/acme/domains.d
+
+- name: Configure acertmgr
+  template: src=acme.conf.j2 dest=/etc/acme/acme.conf
+
+- name: Create private keys
+  command: openssl genrsa -out {{ item }} 4096 creates={{ item }}
+  with_items:
+  - /etc/acme/account.key
+  - /etc/acme/server.key
+
+- name: Ensure private key permissoins
+  file: path={{ item }} owner=root mode=0400
+  with_items:
+  - /etc/acme/account.key
+  - /etc/acme/server.key
+
+- name: Create challenge directory
+  file: path=/var/www/acme-challenge/ owner=root mode=0755 state=directory
+
+- name: Enable acertmgr cronjob
+  cron: name=certmgr special_time=daily job=/opt/acertmgr/acertmgr.py
