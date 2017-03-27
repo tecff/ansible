@@ -1,6 +1,8 @@
 ---
 
-batman_ipv4:
-  address: 10.90.32.21
+batman_ipv4: 10.90.32.21/19
+batman_ipv6: fdef:1337:f10f:cafe::21/64
 
-site_code: ffrgb_umland
+gateway_id: 21
+
+site_code: ffr_umland

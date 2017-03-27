@@ -19,7 +19,7 @@ dnssec=off
 #################################
 # local-address IP addresses to listen on, separated by spaces or commas. Also accepts ports.
 #
-local-address=127.0.0.1,{{ batman_ipv4.address }}
+local-address=127.0.0.1,{{ batman_ipv4 | ipaddr('address') }}
 
 #################################
 # local-port    port to listen on

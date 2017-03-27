@@ -3,6 +3,7 @@ Ansible Freifunk Regensburg
 
 ## Requirements
 
+The python package netaddr is required on the host running ansible.
 The vault password must be stored in `.vault_pass`.
 
 

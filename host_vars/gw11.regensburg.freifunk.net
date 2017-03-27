@@ -1,6 +1,8 @@
 ---
 
-batman_ipv4:
-  address: 10.90.0.11
+batman_ipv4: 10.90.0.11/19
+batman_ipv6: fdef:1337:f00f:cafe::11/64
 
-site_code: ffrgb_stadt
+gateway_id: 11
+
+site_code: ffr_stadt
