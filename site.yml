@@ -15,6 +15,7 @@
   - mesh-interfaces
   - dns
   - dhcpd
+  - respondd
 
 - name: Setup confluence server
   hosts: confluence.regensburg.freifunk.net
