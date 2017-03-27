@@ -1,12 +1,16 @@
 Ansible Freifunk Regensburg
 ===========================
 
+## Requirements
+
+The vault password must be stored in `.vault_pass`.
+
+
 ## Running Ansible
-To deploy all defined roles on all servers simply run `ansible-playbook --ask-vault-pass -i hosts site.yml`.
-To deploy only one server run `ansible-playbook -i "imac1-local," site.yml` (--ask-vault-pass is currently only required on the confluence host).
 
+To deploy all defined roles on all servers simply run `ansible-playbook site.yml`.
+To deploy only one server run `ansible-playbook -i "hostname," site.yml`.
 
-TBA
 
 ## Notes
 
