@@ -1,0 +1,16 @@
+---
+
+- name: Enable backports
+  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
+
+- name: Install linux-image
+  apt: name=linux-image-amd64 default_release=jessie-backports state=latest
+
+- name: Install batctl
+  apt: name=batctl default_release=jessie-backports state=latest
+
+- name: Enable batman during boot
+  lineinfile: dest=/etc/modules line=batman-adv
+
+- name: Load batman-adv module
+  modprobe: name=batman-adv
