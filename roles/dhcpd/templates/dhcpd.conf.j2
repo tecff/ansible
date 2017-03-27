@@ -1,0 +1,28 @@
+# dhcpd.conf
+
+# option definitions common to all supported networks...
+option domain-name "{{ site_domain }}";
+option domain-name-servers {{ name_server }};
+
+default-lease-time 3600;
+max-lease-time 14400;
+
+# Use this to enble / disable dynamic dns updates globally.
+ddns-update-style none;
+
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+
+# Freifunk Regensburg
+subnet {{ batman_ipv4 | ipaddr('network') }} netmask {{ batman_ipv4 | ipaddr('netmask') }} {
+  option routers {{ batman_ipv4 | ipaddr('address') }};
+  pool {
+    range {{ dhcp_first }} {{ dhcp_last }} ;
+  }
+}

@@ -14,6 +14,7 @@
   - fastd
   - mesh-interfaces
   - dns
+  - dhcpd
 
 - name: Setup confluence server
   hosts: confluence.regensburg.freifunk.net
