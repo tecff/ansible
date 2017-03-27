@@ -12,6 +12,7 @@
   roles:
   - batman
   - fastd
+  - mesh-interfaces
   - dns
 
 - name: Setup confluence server

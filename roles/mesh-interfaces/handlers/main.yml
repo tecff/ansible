@@ -1,0 +1,4 @@
+---
+
+- name: Reload interfaces
+  command: /sbin/ifreload -a
