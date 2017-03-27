@@ -1,8 +1,10 @@
-# dhcpd.conf
+# {{ ansible_managed }}
 
 # option definitions common to all supported networks...
 option domain-name "{{ site_domain }}";
 option domain-name-servers {{ name_server }};
+
+local-address {{ batman_ipv4 | ipaddr('address') }};
 
 default-lease-time 3600;
 max-lease-time 14400;
