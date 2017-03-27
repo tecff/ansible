@@ -1,3 +1,5 @@
+# {{ ansible_managed }}
+
 {% for srv in ntp_servers %}
 server {{ srv }} iburst
 {% endfor %}
