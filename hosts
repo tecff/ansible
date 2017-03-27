@@ -1,5 +1,5 @@
 [rz]
-gw11.regensburg.freifunk.net ansible_host=185.53.218.131
-gw21.regensburg.freifunk.net ansible_host=185.53.218.132
-gw31.regensburg.freifunk.net ansible_host=185.53.218.133
-confluence.regensburg.freifunk.net ansible_host=185.53.218.134
+gw11.regensburg.freifunk.net
+gw21.regensburg.freifunk.net
+gw31.regensburg.freifunk.net
+confluence.regensburg.freifunk.net
