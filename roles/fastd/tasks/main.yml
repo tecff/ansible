@@ -22,6 +22,9 @@
   - Reload systemd
   - Restart fastd
 
+- name: Disable fastd default instance
+  service: name=fastd enabled=no
+
 - name: Create directories
   file: path=/etc/fastd/{{ fastd_instance }}/peers state=directory
 
@@ -32,3 +35,6 @@
 - name: Generate fastd secret
   fastd_key: path=/etc/fastd/{{ site_code }}/secret.conf
   notify: Restart fastd
+
+- name: Enable fastd {{ site_code }}
+  service: name=fastd@{{ site_code }} enabled=yes
