@@ -4,12 +4,16 @@ Ansible Freifunk Regensburg
 ## Requirements
 
 The python package netaddr is required on the host running ansible.
+
 The vault password must be stored in `.vault_pass`.
+
+The *only* supported distribution to deploy roles on is debian jessie.
 
 
 ## Running Ansible
 
 To deploy all defined roles on all servers simply run `ansible-playbook site.yml`.
+
 To deploy only one server run `ansible-playbook -i "hostname," site.yml`.
 
 
