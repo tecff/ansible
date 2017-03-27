@@ -13,6 +13,7 @@
   - batman
   - fastd
   - mesh-interfaces
+  - exit-ipv4
   - dns
   - dhcpd
   - respondd
