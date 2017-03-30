@@ -21,8 +21,17 @@ mtu {{ fastd_mtu }};
 peer limit {{ fastd_peers_limit }};
 {% endif %}
 
-on up "ifup --allow hotplug {{ fastd_interface }}";
-on down "ifdown --allow hotplug {{ fastd_interface }}";
+on up "
+	ifconfig $INTERFACE down
+	ip link set address f2:00:90:00:{{ gateway_id }}:10  dev $INTERFACE
+	ifconfig $INTERFACE up
+
+	batctl -m {{ batman_interface }} if add $INTERFACE
+";
+
+on down "
+	batctl -m {{ batman_interface }} if del $INTERFACE
+";
 
 {% if fastd_anonymous %}
 on verify "/etc/fastd/{{ site_code }}/blacklist.sh /opt/{{ site_code }}/vpn-blacklist/blacklist.json";
