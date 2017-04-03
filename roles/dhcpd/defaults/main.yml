@@ -1,6 +1,6 @@
 ---
 
-dhcp_mtu: 1280
-dhcp_first: "{{ batman_ipv4 | ipaddr('512') | ipaddr('address') }}"
-dhcp_last: "{{ batman_ipv4 | ipaddr('2558') | ipaddr('address') }}"
+dhcpd_mtu: 1280
+dhcpd_first: "{{ batman_ipv4 | ipaddr('512') | ipaddr('address') }}"
+dhcpd_last: "{{ batman_ipv4 | ipaddr('2558') | ipaddr('address') }}"
 name_server: "{{ batman_ipv4 | ipaddr('address') }}"
