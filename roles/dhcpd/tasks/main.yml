@@ -7,5 +7,12 @@
   template: src=dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf
   notify: Restart isc-dhcp-server
 
+- name: Specify dhcp interfaces
+  lineinfile:
+    dest: /etc/default/isc-dhcp-server
+    line: "INTERFACES=\"{{ dhcpd_interfaces }}\""
+    regexp: "^INTERFACES="
+  notify: Restart isc-dhcp-server
+
 - name: Start the dhcp server
   service: name=isc-dhcp-server state=started enabled=yes
