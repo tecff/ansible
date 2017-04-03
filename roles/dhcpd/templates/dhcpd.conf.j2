@@ -28,4 +28,18 @@ subnet {{ batman_ipv4 | ipaddr('network') }} netmask {{ batman_ipv4 | ipaddr('ne
   pool {
     range {{ dhcpd_first }} {{ dhcpd_last }} ;
   }
+  # use static arp entries to reduce broadcast
+  on commit {
+    set clip = binary-to-ascii(10, 8, ".", leased-address);
+    set clhw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+    execute("/sbin/arp", "-s", clip, clhw);
+  }
+  on release {
+    set clip = binary-to-ascii(10, 8, ".", leased-address);
+    execute("/sbin/arp", "-d", clip);
+  }
+  on expiry {
+    set clip = binary-to-ascii(10, 8, ".", leased-address);
+    execute("/sbin/arp", "-d", clip);
+  }
 }
