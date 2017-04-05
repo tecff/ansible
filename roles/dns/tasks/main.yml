@@ -4,13 +4,13 @@
   apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
 
 - name: Install powerdns
-  apt: name={{item}} default_release=jessie-backports state=latest
+  apt: name={{ item }} default_release=jessie-backports state=latest
   with_items:
   # - pdns-server
    - pdns-recursor
 
 - name: Configure powerdns
-  template: src={{item}}.j2 dest=/etc/powerdns/{{item}}
+  template: src={{ item }}.j2 dest=/etc/powerdns/{{ item }}
   tags: dns
   notify: Restart powerdns
   with_items:
@@ -18,7 +18,7 @@
    - recursor.conf
 
 - name: Start the powerdns services
-  service: name={{item}} state=started enabled=yes
+  service: name={{ item }} state=started enabled=yes
   with_items:
   # - pdns
    - pdns-recursor
