@@ -1,5 +1,8 @@
 ---
 
+- name: Install dependencies
+  apt: name=ethtool
+
 - name: Clone respondd announce repository
   git: repo={{ respondd_announce_git_root }} dest=/opt/{{ site_code }}/respondd-announce/
   notify: Restart respondd
