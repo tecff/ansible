@@ -17,6 +17,7 @@
   - dns
   - dhcpd
   - respondd
+  - yanic
 
 - name: Setup confluence server
   hosts: confluence.regensburg.freifunk.net
