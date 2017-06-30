@@ -7,7 +7,7 @@ The python package netaddr is required on the host running ansible.
 
 The vault password must be stored in `.vault_pass`.
 
-The *only* supported distribution to deploy roles on is debian jessie.
+The *only* supported distribution to deploy roles on is debian stretch.
 
 
 ## Running Ansible

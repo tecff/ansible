@@ -1,7 +1,7 @@
 ---
 
 - name: Install dhcp server
-  apt: name=isc-dhcp-server state=latest
+  apt: name=isc-dhcp-server
 
 - name: Configure dhcp server
   template: src=dhcpd.conf.j2 dest=/etc/dhcp/dhcpd.conf

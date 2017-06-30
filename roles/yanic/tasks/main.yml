@@ -29,7 +29,7 @@
   service: name=yanic enabled=yes
 
 - name: Install system publish unit
-  template: src={{item}} dest=/lib/systemd/system/{{item}}
+  template: src={{ item }} dest=/lib/systemd/system/{{ item }}
   when: yanic_publisher
   with_items:
     - yanic-publish.service

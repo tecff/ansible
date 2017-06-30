@@ -1,7 +1,7 @@
 ---
 
 - name: Install iptables-persistent
-  apt: name=iptables-persistent state=present
+  apt: name=iptables-persistent
 
 - name: Enable IPv4 routing
   sysctl: name=net.ipv4.ip_forward value=1 state=present

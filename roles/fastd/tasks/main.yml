@@ -1,10 +1,7 @@
 ---
 
-- name: Enable backports
-  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
-
 - name: Install fastd
-  apt: name=fastd default_release=jessie-backports state=latest
+  apt: name=fastd state=latest
 
 - name: Install haveged (to create entropy)
   apt: name=haveged

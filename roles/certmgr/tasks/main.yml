@@ -1,17 +1,12 @@
 ---
 
-- name: Enable backports
-  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
-
 - name: Install dependencies
-  apt: name={{ item }} state=present
+  apt: name={{ item }}
   with_items:
   - git
   - python-dateutil
+  - python-openssl
   - python-yaml
-
-- name: Install python-openssl
-  apt: name=python-openssl default_release=jessie-backports state=latest
 
 - name: Install acertmgr
   git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version=480337648699cfbe321774dee1d8aa82eb27b626

@@ -1,10 +1,7 @@
 ---
 
-- name: Enable backports
-  apt_repository: repo='deb http://httpredir.debian.org/debian jessie-backports main' state=present
-
 - name: Install nginx
-  apt: name=nginx-light default_release=jessie-backports state=latest
+  apt: name=nginx-light state=latest
 
 - name: Create certificate directory
   file: path=/etc/nginx/ssl state=directory mode=0750

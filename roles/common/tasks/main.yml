@@ -1,10 +1,11 @@
 ---
 
 - name: Install misc software
-  apt: name={{ item }} state=present
+  apt: name={{ item }}
   with_items:
   - dnsutils
   - htop
+  - less
   - openssl
   - pydf
   - rsync
