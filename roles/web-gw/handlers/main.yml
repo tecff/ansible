@@ -1,0 +1,7 @@
+---
+
+- name: Restart nginx
+  service: name=nginx state=restarted
+
+- name: Run certmgr
+  command: /opt/acertmgr/acertmgr.py

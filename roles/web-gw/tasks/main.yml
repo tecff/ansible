@@ -1,0 +1,17 @@
+---
+
+- name: Ensure certificates are available
+  command: openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/ssl/{{ ansible_fqdn }}.key -out /etc/nginx/ssl/{{ ansible_fqdn }}.crt -days 730 -subj "/CN={{ ansible_fqdn }}" creates=/etc/nginx/ssl/{{ ansible_fqdn }}.crt
+  notify: Restart nginx
+
+- name: Configure certificate manager
+  template: src=certs.j2 dest=/etc/acme/domains.d/{{ ansible_fqdn }}.conf
+  notify: Run certmgr
+
+- name: Configure vhosts
+  template: src=vhost.j2 dest=/etc/nginx/sites-available/www
+  notify: Restart nginx
+
+- name: Enable vhosts
+  file: src=/etc/nginx/sites-available/www dest=/etc/nginx/sites-enabled/www state=link
+  notify: Restart nginx

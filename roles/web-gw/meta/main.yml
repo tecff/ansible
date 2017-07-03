@@ -1,0 +1,5 @@
+---
+
+dependencies:
+- { role: certmgr }
+- { role: nginx, nginx_ssl: True }

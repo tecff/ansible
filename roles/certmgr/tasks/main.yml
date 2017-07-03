@@ -32,6 +32,9 @@
   - /etc/acme/account.key
   - /etc/acme/server.key
 
+- name: Download Lets Encrypt CA certificate
+  get_url: url=https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem dest=/etc/acme/lets-encrypt-x3-cross-signed.pem
+
 - name: Create challenge directory
   file: path=/var/www/acme-challenge/ owner=root mode=0755 state=directory
 
