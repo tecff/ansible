@@ -20,6 +20,7 @@
   - { src: '.zshrc.local', dest: '/root/.zshrc.local' }
   - { src: 'motd', dest: '/etc/motd' }
   - { src: 'prompt_gentoo_setup', dest: '/usr/share/zsh/functions/Prompts/prompt_gentoo_setup' }
+  - { src: 'vimrc.local', dest: '/etc/vim/vimrc.local' }
 
 - name: Set shell for root user
   user: name=root shell=/bin/zsh
