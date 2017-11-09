@@ -6,15 +6,8 @@
 - name: Install haveged (to create entropy)
   apt: name=haveged
 
-- name: Copy systemd unit file
-  command: /bin/cp /lib/systemd/system/fastd@.service /etc/systemd/system/fastd@.service creates=/etc/systemd/system/fastd@.service
-
-- name: Fix systemd unit for fastd
-  lineinfile:
-    dest: /etc/systemd/system/fastd@.service
-    line: "ExecStopPost=/bin/rm -f /run/fastd-%I.sock"
-    regexp: "^ExecStopPost="
-    insertafter: "^ExecReload="
+- name: Systemd unit for fastd
+  copy: src=fastd@.service dest=/etc/systemd/system/fastd@.service
   notify:
   - Reload systemd
   - Restart fastd
@@ -30,8 +23,8 @@
   notify: Restart fastd
 
 - name: Generate fastd secret
-  fastd_key: path=/etc/fastd/{{ site_code }}/secret.conf
+  fastd_key: path=/etc/fastd/{{ fastd_instance }}/secret.conf
   notify: Restart fastd
 
-- name: Enable fastd {{ site_code }}
-  service: name=fastd@{{ site_code }} enabled=yes
+- name: Enable fastd {{ fastd_instance }}
+  service: name=fastd@{{ fastd_instance }} enabled=yes
