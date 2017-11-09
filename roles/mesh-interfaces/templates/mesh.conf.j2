@@ -3,28 +3,31 @@
 # br-{{ site_code }}
 auto br-{{ site_code }}
 iface br-{{ site_code }}
+	hwaddress	f2:00:90:00:{{ gateway_id }}:20
+	mtu		1500
+	#
 	bridge-fd	0
 	bridge-ports	bat-{{ site_code }}
 	bridge-stp	no
 	#
-	address	{{ batman_ipv4 }}
-	address	{{ batman_ipv6 }}
-	mtu	1500
+	address		{{ batman_ipv4 }}
+	address		{{ batman_ipv6 }}
 
 # bat-{{ site_code }}
 auto bat-{{ site_code }}
 iface bat-{{ site_code }}
-	batman-hop-penalty	5
-	batman-ifaces	dmy-{{ site_code }} vpn-{{ site_code }}
-	batman-ifaces-ignore-regex	.*_.*
+	hwaddress	f2:00:90:00:{{ gateway_id }}:20
+	mtu		1500
 	#
-	mtu	1500
+	batman-hop-penalty	5
+	batman-ifaces		dmy-{{ site_code }} vpn-{{ site_code }}
+	batman-ifaces-ignore-regex	.*_.*
 	#
 	up /usr/sbin/batctl -m bat-{{ site_code }} gw_mode server 100000 100000
 
 # dmy-{{ site_code }}
 auto dmy-{{ site_code }}
 iface dmy-{{ site_code }}
-	hwaddress f2:00:90:00:{{ gateway_id }}:00
-	link-type dummy
-	mtu 1560
+	hwaddress	f2:00:90:00:{{ gateway_id }}:00
+	link-type	dummy
+	mtu		1560
