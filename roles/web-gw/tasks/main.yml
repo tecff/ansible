@@ -4,6 +4,9 @@
   command: openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/nginx/ssl/{{ ansible_fqdn }}.key -out /etc/nginx/ssl/{{ ansible_fqdn }}.crt -days 730 -subj "/CN={{ ansible_fqdn }}" creates=/etc/nginx/ssl/{{ ansible_fqdn }}.crt
   notify: Restart nginx
 
+- name: Create web content directory
+  file: path=/var/www/html state=directory mode=0750
+
 - name: Configure certificate manager
   template: src=certs.j2 dest=/etc/acme/domains.d/{{ ansible_fqdn }}.conf
   notify: Run certmgr
