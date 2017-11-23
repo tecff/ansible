@@ -6,10 +6,10 @@
   group: root
   perm: '400'
   format: key
-  action: 'service nginx restart'
+  action: '/usr/sbin/service nginx restart'
 - path: /etc/nginx/ssl/{{ confluence_domain }}.crt
   user: root
   group: root
   perm: '400'
   format: crt,ca
-  action: 'service nginx restart'
+  action: '/usr/sbin/service nginx restart'
