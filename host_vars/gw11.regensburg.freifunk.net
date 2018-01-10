@@ -1,7 +1,7 @@
 ---
 
 batman_ipv4: 10.90.32.11/19
-batman_ipv6: fdef:f10f:f00f:cafe::11/64
+batman_ipv6: fdef:f10f:1337:cafe::11/64
 
 gateway_id: 11
 
