@@ -10,6 +10,10 @@ server {
 	}
 
 	root /var/www/html;
+
+	location /firmware {
+		proxy_pass https://regensburg.freifunk.net/firmware;
+	}
 }
 
 server {
@@ -22,4 +26,8 @@ server {
 	ssl_certificate /etc/nginx/ssl/{{ ansible_fqdn }}.crt;
 
 	root /var/www/html;
+
+	location /firmware {
+		proxy_pass https://regensburg.freifunk.net/firmware;
+	}
 }
