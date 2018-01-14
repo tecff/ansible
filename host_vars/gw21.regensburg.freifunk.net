@@ -5,4 +5,4 @@ batman_ipv6: fdef:f20f:1337:cafe::21/64
 
 gateway_id: 21
 
-site_code: ffr_umland
+site_code: ffr_uml
