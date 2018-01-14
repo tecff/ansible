@@ -9,7 +9,7 @@
   - python-yaml
 
 - name: Install acertmgr
-  git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version=480337648699cfbe321774dee1d8aa82eb27b626
+  git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version=017f55f57cb77628061b6a5f4236055c2e4d5f02
 
 - name: Create config directories
   file: path={{ item }} state=directory mode=0755
