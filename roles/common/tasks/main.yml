@@ -6,7 +6,9 @@
   - dnsutils
   - htop
   - less
+  - net-tools
   - openssl
+  - psmisc
   - pydf
   - rsync
   - sudo
