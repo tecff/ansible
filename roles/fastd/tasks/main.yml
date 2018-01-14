@@ -26,5 +26,8 @@
   fastd_key: path=/etc/fastd/{{ fastd_instance }}/secret.conf
   notify: Restart fastd
 
+- name: Make sure at least a dummy blacklist.sh is available
+  copy: src=blacklist.sh dest=/etc/fastd/{{ fastd_instance }}/blacklist.sh mode=0755 force=no
+
 - name: Enable fastd {{ fastd_instance }}
   service: name=fastd@{{ fastd_instance }} enabled=yes
