@@ -5,4 +5,4 @@ batman_ipv6: fdef:f10f:1337:cafe::11/64
 
 gateway_id: 11
 
-site_code: ffr_stadt
+site_code: ffr_cty
