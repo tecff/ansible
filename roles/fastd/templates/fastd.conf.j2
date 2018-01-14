@@ -6,6 +6,7 @@ status socket "/run/fastd-{{ fastd_instance }}.sock";
 
 interface "{{ fastd_interface }}";
 
+method "null";
 method "salsa2012+umac";
 method "xsalsa20-poly1305";
 
