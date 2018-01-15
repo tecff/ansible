@@ -2,7 +2,8 @@
 [respondd]
 enable           = {{ yanic_respondd | ternary('true','false') }}
 collect_interval = "{{ yanic_respondd_collect_interval }}"
-interface        = "{{ yanic_respondd_interface }}"
+interfaces       = ["{{ yanic_respondd_interface }}"]
+sites            = []
 
 [webserver]
 enable  = {{ yanic_webserver | ternary('true','false') }}
@@ -10,17 +11,20 @@ bind    = "{{ yanic_webserver_bind }}"
 webroot = "{{ yanic_webserver_webroot }}"
 
 [nodes]
-enable         = {{yanic_nodes | ternary('true','false') }}
-state_path     = "{{yanic_nodes_state_path}}"
-save_interval  = "{{yanic_nodes_save_interval}}"
-offline_after  = "{{yanic_nodes_offline_after}}"
-prune_after    = "{{yanic_nodes_prune_after}}"
+state_path     = "{{ yanic_nodes_state_path }}"
+prune_after    = "{{ yanic_nodes_prune_after }}"
+save_interval  = "{{ yanic_nodes_save_interval }}"
+offline_after  = "{{ yanic_nodes_offline_after }}"
 
+[[nodes.output.meshviewer-ffrgb]]
+enable  = {{ yanic_meshviewer_ffrgb_enable | ternary('true','false') }}
+path    = "{{ yanic_meshviewer_ffrgb_path }}"
 
-[meshviewer]
-version        = {{yanic_meshviewer_version}}
-nodes_path     = "{{yanic_meshviewer_nodes}}"
-graph_path     = "{{yanic_meshviewer_graph}}"
+[[nodes.output.meshviewer]]
+enable         = {{ yanic_meshviewer_enable | ternary('true','false') }}
+version        = {{ yanic_meshviewer_version }}
+nodes_path     = "{{ yanic_meshviewer_nodes }}"
+graph_path     = "{{ yanic_meshviewer_graph }}"
 
 [database]
 delete_after = "{{ yanic_database_delete_after }}"
@@ -35,9 +39,11 @@ username = "{{ db.username }}"
 password = "{{ db.password }}"
 {% endfor %}
 
-{% for db in yanic_socket %}
-[[database.connection.socket]]
+[database.connection.influxdb.tags]
+
+{% for db in yanic_graphite %}
+[[database.connection.graphite]]
 enable   = {{ db.enable | ternary('true','false') }}
-type     = "{{ db.type }}"
-address = "{{ db.address }}"
+address  = "{{ db.address }}"
+prefix   = "{{ db.prefix }}"
 {% endfor %}
