@@ -5,7 +5,7 @@
   notify: Restart nginx
 
 - name: Create web content directory
-  file: path=/var/www/html state=directory mode=0750
+  file: path=/var/www/html state=directory mode=0755
 
 - name: Configure certificate manager
   template: src=certs.j2 dest=/etc/acme/domains.d/{{ ansible_fqdn }}.conf
