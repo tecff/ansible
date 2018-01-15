@@ -6,6 +6,9 @@
 - name: Enable IPv4 routing
   sysctl: name=net.ipv4.ip_forward value=1 state=present
 
+- name: Load nf_conntrack module
+  modprobe: name=nf_conntrack
+
 - name: Increas conntrack limit
   sysctl: name=net.netfilter.nf_conntrack_max value={{ conntrack_max }} state=present
 
