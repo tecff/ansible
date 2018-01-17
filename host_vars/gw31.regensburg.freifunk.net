@@ -1,8 +1,8 @@
 ---
 
-batman_ipv4: 10.90.192.31/19
-batman_ipv6: fdef:f60f:1337:cafe::31/64
+batman_ipv4: 10.90.96.31/19
+batman_ipv6: fdef:f30f:1337:cafe::31/64
 
 gateway_id: 31
 
-site_code: ffrgb_test
+site_code: ffrgb_tst
