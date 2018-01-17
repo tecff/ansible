@@ -1,7 +1,7 @@
 ---
 
 - name: Create users
-  user: name=yanic generate_ssh_key=yes ssh_key_type=rsa ssh_key_file=.ssh/id_rsa ssh_key_comment="yanic@{{inventory_hostname}}"
+  user: name=yanic
 
 - name: Install yanic
   shell: /usr/local/go/bin/go get -u github.com/FreifunkBremen/yanic
@@ -27,17 +27,3 @@
 
 - name: Enable yanic
   service: name=yanic enabled=yes
-
-- name: Install system publish unit
-  template: src={{ item }}.j2 dest=/lib/systemd/system/{{ item }}
-  when: yanic_publisher
-  with_items:
-    - yanic-publish.service
-    - yanic-publish.timer
-  notify:
-    - Reload systemd
-    - Restart yanic-publish
-
-- name: Enable yanic-publish
-  service: name=yanic-publish.timer enabled=yes
-  when: yanic_publisher
