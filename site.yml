@@ -8,7 +8,7 @@
   - ntp
 
 - name: Setup gateway servers
-  hosts: gw31.regensburg.freifunk.net
+  hosts: [gw11.regensburg.freifunk.net, gw21.regensburg.freifunk.net, gw31.regensburg.freifunk.net]
   roles:
   - batman
   - fastd
