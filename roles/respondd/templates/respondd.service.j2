@@ -1,7 +1,8 @@
 # {{ ansible_managed }}
 
 [Unit]
-Description=Respondd
+Description=respondd
+After=network.target
 
 [Service]
 ExecStart=/opt/{{ site_code }}/respondd-announce/respondd.py -b {{ batman_interface }} -i {{ main_bridge }} -i vpn-{{ site_code }} -d /opt/{{ site_code }}/respondd-announce/
