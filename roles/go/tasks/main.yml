@@ -1,7 +1,7 @@
 ---
 
 - name: Download and install go
-  unarchive: src=https://storage.googleapis.com/golang/go1.8.1.linux-amd64.tar.gz dest=/usr/local copy=no
+  unarchive: src=https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz dest=/usr/local copy=no
 
 - name: Configure go
   copy: src=go.sh dest=/etc/profile.d/go.sh
