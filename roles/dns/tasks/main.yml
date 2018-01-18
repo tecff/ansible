@@ -3,19 +3,25 @@
 - name: Install powerdns
   apt: name={{ item }}
   with_items:
-  # - pdns-server
+   - pdns-backend-bind
    - pdns-recursor
+   - pdns-server
+
+- name: Create zone directory
+  file: path=/etc/powerdns/bind/ state=directory
 
 - name: Configure powerdns
   template: src={{ item }}.j2 dest=/etc/powerdns/{{ item }}
   tags: dns
   notify: Restart powerdns
   with_items:
-  # - pdns.conf
+   - bind/ffrgb.zone
+   - bindbackend.conf
+   - pdns.conf
    - recursor.conf
 
 - name: Start the powerdns services
   service: name={{ item }} state=started enabled=yes
   with_items:
-  # - pdns
+   - pdns
    - pdns-recursor

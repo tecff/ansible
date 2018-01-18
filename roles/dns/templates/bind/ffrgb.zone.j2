@@ -1,0 +1,14 @@
+$ORIGIN ffrgb			; base for unqualified names
+$TTL 1h				; default time-to-live
+@				IN	      SOA ns.ffrgb. hostmaster.ffrgb. (
+					2018011701; serial
+					1d; refresh
+					2h; retry
+					4w; expire
+					1h; minimum time-to-live
+				)
+				IN	NS	ns.ffrgb.
+; Services
+1.ntp.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
+2.ntp.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
+fw.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}

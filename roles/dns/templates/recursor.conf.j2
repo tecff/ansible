@@ -6,15 +6,21 @@
 #allow-from=127.0.0.0/8
 
 #################################
-# daemon        Operate as a daemon
+# config-dir    Location of configuration directory (recursor.conf)
 #
-daemon=yes
+config-dir=/etc/powerdns
 
 #################################
 # dnssec        DNSSEC mode: off/process-no-validate (default)/process/log-fail/validate
 #
 # dnssec=process-no-validate
 dnssec=off
+
+#################################
+# forward-zones Zones for which we forward queries, comma separated domain=ip pairs
+#
+# forward-zones=
+forward-zones=ffrgb=127.0.0.1:5300
 
 #################################
 # local-address IP addresses to listen on, separated by spaces or commas. Also accepts ports.
@@ -29,7 +35,13 @@ local-port=53
 #################################
 # quiet Suppress logging of questions and answers
 #
-quiet=on
+quiet=yes
+
+#################################
+# security-poll-suffix  Domain name from which to query security update notifications
+#
+# security-poll-suffix=secpoll.powerdns.com.
+security-poll-suffix=
 
 #################################
 # setgid        If set, change group id to this gid for more security
