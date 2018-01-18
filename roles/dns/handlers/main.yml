@@ -3,5 +3,5 @@
 - name: Restart powerdns
   service: name={{ item }} state=restarted
   with_items:
-  # - pdns
+   - pdns
    - pdns-recursor
