@@ -5,6 +5,8 @@
 
 - name: Install yanic
   shell: /usr/local/go/bin/go get -u github.com/FreifunkBremen/yanic
+  args:
+    creates: /opt/go/bin/yanic
   environment:
     GOPATH: /opt/go
   notify: Restart yanic
