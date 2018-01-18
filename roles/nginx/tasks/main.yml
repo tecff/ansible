@@ -32,5 +32,11 @@
   when: nginx_ssl == True
   notify: Restart nginx
 
+- name: Ensure network and dns are available before nginx
+  lineinfile:
+    dest: /lib/systemd/system/nginx.service
+    line: "After=network-online.target nss-lookup.target"
+    regexp: "^After="
+
 - name: Start nginx
   service: name=nginx state=started enabled=yes
