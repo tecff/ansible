@@ -12,3 +12,4 @@ $TTL 1h				; default time-to-live
 1.ntp.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
 2.ntp.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
 fw.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
+director.services			IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
