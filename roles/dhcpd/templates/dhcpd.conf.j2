@@ -2,7 +2,7 @@
 
 # option definitions common to all supported networks...
 option domain-name "{{ site_domain }}";
-option domain-name-servers {{ name_server }};
+option domain-name-servers {{nextnode4}}, {{ name_server }};
 
 local-address {{ batman_ipv4 | ipaddr('address') }};
 
