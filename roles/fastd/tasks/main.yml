@@ -16,18 +16,32 @@
   service: name=fastd enabled=no
 
 - name: Create directories
-  file: path=/etc/fastd/{{ fastd_instance }}/peers state=directory
+  file: path=/etc/fastd/{{ site_code }} state=directory
+
+- name: Create directories
+  file: path=/etc/fastd/{{ site_code }}{{ item }}/peers state=directory
+  with_sequence: start=0 count={{ fastd_instances }}
 
 - name: Configure fastd
-  template: src=fastd.conf.j2 dest=/etc/fastd/{{ fastd_instance }}/fastd.conf
+  template: src=fastd.conf.j2 dest=/etc/fastd/{{ site_code }}{{ item }}/fastd.conf
+  with_sequence: start=0 count={{ fastd_instances }}
   notify: Restart fastd
 
 - name: Generate fastd secret
-  fastd_key: path=/etc/fastd/{{ fastd_instance }}/secret.conf
+  fastd_key: path=/etc/fastd/{{ site_code }}/secret.conf
   notify: Restart fastd
 
-- name: Make sure at least a dummy blacklist.sh is available
-  copy: src=blacklist.sh dest=/etc/fastd/{{ fastd_instance }}/blacklist.sh mode=0755 force=no
+- name: Create symlinks (secret)
+  file: src=/etc/fastd/{{ site_code }}/secret.conf dest=/etc/fastd/{{ site_code }}{{ item }}/secret.conf state=link
+  with_sequence: start=0 count={{ fastd_instances }}
 
-- name: Enable fastd {{ fastd_instance }}
-  service: name=fastd@{{ fastd_instance }} enabled=yes
+- name: Make sure at least a dummy blacklist.sh is available
+  copy: src=blacklist.sh dest=/etc/fastd/{{ site_code }}/blacklist.sh mode=0755 force=no
+
+- name: Create symlinks (blacklist)
+  file: src=/etc/fastd/{{ site_code }}/blacklist.sh dest=/etc/fastd/{{ site_code }}{{ item }}/blacklist.sh state=link
+  with_sequence: start=0 count={{ fastd_instances }}
+
+- name: Enable fastd {{ site_code }}
+  service: name=fastd@{{ site_code }}{{ item }} enabled=yes
+  with_sequence: start=0 count={{ fastd_instances }}

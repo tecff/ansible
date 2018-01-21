@@ -2,9 +2,9 @@
 
 log to syslog level warn;
 hide ip addresses yes;
-status socket "/run/fastd-{{ fastd_instance }}.sock";
+status socket "/run/fastd-{{ site_code }}{{ item }}.sock";
 
-interface "{{ fastd_interface }}";
+interface "vpn-{{ site_code }}{{ item }}";
 
 method "null";
 method "salsa2012+umac";
@@ -12,7 +12,7 @@ method "xsalsa20-poly1305";
 
 secure handshakes yes;
 
-bind {{ fastd_bind }}:{{ fastd_port }};
+bind {{ fastd_bind }}:{{ fastd_port + item|int }};
 
 include "secret.conf";
 
@@ -24,7 +24,7 @@ peer limit {{ fastd_peers_limit }};
 
 on up "
 	ifconfig $INTERFACE down
-	ip link set address f2:00:90:00:{{ gateway_id }}:10  dev $INTERFACE
+	ip link set address f2:00:90:00:{{ gateway_id }}:{{ 10 + item|int }} dev $INTERFACE
 	ifconfig $INTERFACE up
 
 	batctl -m {{ batman_interface }} if add $INTERFACE

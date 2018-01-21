@@ -2,8 +2,7 @@ batman_interface: bat-{{ site_code }}
 
 fastd_anonymous: true
 fastd_bind: any
-fastd_instance: "{{ site_code }}"
-fastd_interface: vpn-{{ site_code }}
+fastd_instances: 3
 fastd_mtu: 1312
 fastd_peers_limit: -1
 fastd_port: 10000
