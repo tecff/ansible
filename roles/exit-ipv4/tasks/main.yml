@@ -12,7 +12,7 @@
 - name: Enable nf_conntrack during boot
   lineinfile: dest=/etc/modules line=nf_conntrack
 
-- name: Increas conntrack limit
+- name: Increase conntrack limit
   sysctl: name=net.netfilter.nf_conntrack_max value={{ conntrack_max }} state=present
 
 - name: Configure iptables
