@@ -16,7 +16,7 @@ bind {{ fastd_bind }}:{{ fastd_port + item|int }};
 
 include "secret.conf";
 
-mtu {{ fastd_mtu }};
+mtu {{ mtu }};
 
 {% if fastd_peers_limit > -1 %}
 peer limit {{ fastd_peers_limit }};

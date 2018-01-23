@@ -24,7 +24,7 @@ log-facility local7;
 # Freifunk Regensburg
 subnet {{ batman_ipv4 | ipaddr('network') }} netmask {{ batman_ipv4 | ipaddr('netmask') }} {
   option routers {{ batman_ipv4 | ipaddr('address') }};
-  option interface-mtu {{ dhcpd_mtu }};
+  option interface-mtu {{ mtu }};
   pool {
     range {{ dhcpd_first }} {{ dhcpd_last }} ;
   }
