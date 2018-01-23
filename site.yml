@@ -11,6 +11,7 @@
   hosts: [gw11.regensburg.freifunk.net, gw21.regensburg.freifunk.net, gw31.regensburg.freifunk.net]
   roles:
   - batman
+  - bird
   - fastd
   - mesh-interfaces
   - exit-ipv4

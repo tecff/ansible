@@ -1,0 +1,14 @@
+---
+
+- name: Install bird
+  apt: package={{ item }}
+  with_items:
+  - bird
+  - bird6
+
+- name: Configure bird
+  template: src=bird.conf.j2 dest=/etc/bird/bird.conf
+  notify: Restart bird
+
+- name: Enable bird
+  service: name=bird state=started enabled=yes
