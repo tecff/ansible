@@ -13,3 +13,10 @@ $TTL 1h				; default time-to-live
 2.ntp.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
 fw.services				IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
 director.services			IN	AAAA	{{ batman_ipv6 | ipaddr('address') }}
+; Gateways
+gw11			IN	AAAA fdef:f10f:1337:cafe::11
+gw11			IN	A	10.90.32.11
+gw21			IN	AAAA fdef:f20f:1337:cafe::21
+gw21			IN	A	10.90.64.21
+gw31			IN	AAAA fdef:f30f:1337:cafe::31
+gw31			IN	A	10.90.96.31
