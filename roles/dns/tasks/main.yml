@@ -16,6 +16,7 @@
   notify: Restart powerdns
   with_items:
    - bind/ffrgb.zone
+   - bind/90.10.in-addr.arpa.zone
    - bindbackend.conf
    - pdns.conf
    - recursor.conf

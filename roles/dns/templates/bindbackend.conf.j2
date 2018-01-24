@@ -3,3 +3,8 @@ zone "ffrgb" {
 	file "/etc/powerdns/bind/ffrgb.zone";
 	allow-update { none; };
 };
+zone "90.10.in-addr.arpa" {
+	type master;
+	file "/etc/powerdns/bind/90.10.in-addr.arpa.zone";
+	allow-update { none; };
+};
