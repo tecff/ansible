@@ -11,6 +11,9 @@ iface br-{{ site_code }}
 	#
 	address		{{ batman_ipv4 }}
 	address		{{ batman_ipv6 }}
+	{% if global_ipv6 is defined %}
+	address		{{ global_ipv6 }}
+	{% endif %}
 
 # bat-{{ site_code }}
 auto bat-{{ site_code }}
