@@ -4,7 +4,7 @@
   user: name=yanic
 
 - name: Install yanic
-  shell: /usr/local/go/bin/go get -v -u github.com/FreifunkBremen/yanic
+  shell: /usr/local/go/bin/go get -v -u github.com/ffrgb/yanic
   args:
     creates: /opt/go/bin/yanic
   environment:
