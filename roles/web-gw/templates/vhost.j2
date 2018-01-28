@@ -18,6 +18,10 @@ server {
 	location /move.php {
 		proxy_pass https://home.mephis.to/move.php;
 	}
+	location /firmware-ng/experimental {
+		proxy_pass https://home.mephis.to/ff/experimental/images;
+	}
+
 }
 
 server {

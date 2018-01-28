@@ -28,9 +28,9 @@ yanic_database_delete_after: "7d"
 yanic_database_delete_interval: "1h"
 
 yanic_influxdb:
-- enable: false
-  host: http://localhost:8086
-  database: ffhb
+- enable: true
+  host: http://88.99.2.28:8086
+  database: ffrgb
   username: ""
   password: ""
 yanic_graphite:
