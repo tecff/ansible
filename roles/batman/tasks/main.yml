@@ -1,7 +1,68 @@
 ---
 
-- name: Install batctl
+- name: Install batctl from apt
+  when: batman_dkms == false
   apt: name=batctl state=latest
+
+- name: Install dependencies for building DKMS
+  when: batman_dkms == true
+  apt: name={{ item }}
+  with_items:
+    - ruby
+    - ruby-dev
+    - build-essential
+    - curl
+    - dkms
+    - pkgconf
+    - libnl-genl-3-dev
+    - linux-headers-{{ ansible_kernel }}
+
+- name: Install Ruby GEM
+  when: batman_dkms == true
+  gem: name=fpm-cookery
+
+- name: Cloning FFNW Repo
+  when: batman_dkms == true
+  git:  repo=https://git.ffnw.de/ffnw-server/ffnw-debian
+        dest=/opt/ffnw-debian
+        recursive=yes
+        force=yes
+
+- name: Cook batman-adv-dkms
+  command: /usr/local/bin/fpm-cook
+  args:
+    chdir: /opt/ffnw-debian/batman-adv-dkms
+
+- name: Get cooked Debian Packages to List
+  shell: "find *.deb"
+  register: pkg_list
+  args:
+      chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
+
+- name: Install batman-adv-dkms
+  command: "/usr/bin/dpkg -i {{ item }}"
+  args:
+    chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
+  with_items:
+    - "{{ pkg_list.stdout_lines }}"
+
+- name: Cook batctl
+  command: /usr/local/bin/fpm-cook
+  args:
+    chdir: /opt/ffnw-debian/batctl
+
+- name: Get cooked Debian Packages to List
+  shell: "find *.deb"
+  register: pkg_list
+  args:
+      chdir: /opt/ffnw-debian/batctl/pkg
+
+- name: Install batctl
+  command: "/usr/bin/dpkg -i {{ item }}"
+  args:
+    chdir: /opt/ffnw-debian/batctl/pkg
+  with_items:
+    - "{{ pkg_list.stdout_lines }}"
 
 - name: Enable batman during boot
   lineinfile: dest=/etc/modules line=batman-adv
