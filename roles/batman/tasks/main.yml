@@ -8,8 +8,6 @@
   when: batman_dkms == true
   apt: name={{ item }}
   with_items:
-    - ruby
-    - ruby-dev
     - build-essential
     - curl
     - dkms
@@ -17,58 +15,38 @@
     - libnl-genl-3-dev
     - linux-headers-{{ ansible_kernel }}
 
-- name: Install Ruby GEM
+- name: Download batman-adv source
   when: batman_dkms == true
-  gem: name=fpm-cookery
+  get_url:  url="https://downloads.open-mesh.org/batman/releases/batman-adv-{{ batman-adv_version }}/batman-adv-{{ batman-adv_version }}.tar.gz"
+            dest=/tmp/batman-adv-{{ batman-adv_version }}.tar.gz
+            checksum=sha256:{{ batman-adv_tar_sha256_hash }}
 
-- name: Cloning FFNW Repo
+- name: Unpack batman-adv source
   when: batman_dkms == true
-  git:  repo=https://git.ffnw.de/ffnw-server/ffnw-debian
-        dest=/opt/ffnw-debian
-        recursive=yes
-        force=yes
+  unarchive: src=/tmp/batman-adv-{{ batman-adv_version }}.tar.gz
+             dest=/usr/src/
+             copy=no
 
-- name: Cook batman-adv-dkms
+- name: Install dkms.conf
   when: batman_dkms == true
-  command: /usr/local/bin/fpm-cook
-  args:
-    chdir: /opt/ffnw-debian/batman-adv-dkms
+  template: src=dkms.conf.j2
+            dest="/usr/src/batman-adv-{{ batman-adv_version }}/dkms.conf"
 
-- name: Get cooked Debian Packages to List
+- name: Add module via dkms
   when: batman_dkms == true
-  shell: "find *.deb"
-  register: pkg_list
-  args:
-      chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
+  command: dkms add -m batman-adv -v "{{ batman-adv_version }}"
 
-- name: Install batman-adv-dkms
+- name: Build module via dkms
   when: batman_dkms == true
-  command: "/usr/bin/dpkg -i {{ item }}"
-  args:
-    chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
-  with_items:
-    - "{{ pkg_list.stdout_lines }}"
+  command: dkms build -m batman-adv -v "{{ batman-adv_version }}"
 
-- name: Cook batctl
+- name: Install module via dkms
   when: batman_dkms == true
-  command: /usr/local/bin/fpm-cook
-  args:
-    chdir: /opt/ffnw-debian/batctl
+  command: dkms install -m batman-adv -v "{{ batman-adv_version }}"
 
-- name: Get cooked Debian Packages to List
+- name: Rebuild kernel initramfs
   when: batman_dkms == true
-  shell: "find *.deb"
-  register: pkg_list
-  args:
-      chdir: /opt/ffnw-debian/batctl/pkg
-
-- name: Install batctl
-  when: batman_dkms == true
-  command: "/usr/bin/dpkg -i {{ item }}"
-  args:
-    chdir: /opt/ffnw-debian/batctl/pkg
-  with_items:
-    - "{{ pkg_list.stdout_lines }}"
+  command: update-initramfs -c -k all
 
 - name: Enable batman during boot
   lineinfile: dest=/etc/modules line=batman-adv
