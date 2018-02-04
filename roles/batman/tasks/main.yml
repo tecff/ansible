@@ -29,17 +29,20 @@
         force=yes
 
 - name: Cook batman-adv-dkms
+  when: batman_dkms == true
   command: /usr/local/bin/fpm-cook
   args:
     chdir: /opt/ffnw-debian/batman-adv-dkms
 
 - name: Get cooked Debian Packages to List
+  when: batman_dkms == true
   shell: "find *.deb"
   register: pkg_list
   args:
       chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
 
 - name: Install batman-adv-dkms
+  when: batman_dkms == true
   command: "/usr/bin/dpkg -i {{ item }}"
   args:
     chdir: /opt/ffnw-debian/batman-adv-dkms/pkg
@@ -47,17 +50,20 @@
     - "{{ pkg_list.stdout_lines }}"
 
 - name: Cook batctl
+  when: batman_dkms == true
   command: /usr/local/bin/fpm-cook
   args:
     chdir: /opt/ffnw-debian/batctl
 
 - name: Get cooked Debian Packages to List
+  when: batman_dkms == true
   shell: "find *.deb"
   register: pkg_list
   args:
       chdir: /opt/ffnw-debian/batctl/pkg
 
 - name: Install batctl
+  when: batman_dkms == true
   command: "/usr/bin/dpkg -i {{ item }}"
   args:
     chdir: /opt/ffnw-debian/batctl/pkg
