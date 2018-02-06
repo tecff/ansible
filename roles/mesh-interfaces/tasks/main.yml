@@ -9,6 +9,12 @@
 - name: Uninstall ifupdown
   apt: name=ifupdown state=absent
 
+# this is required for nginx, dhcpd and other to start correctly
+# see https://github.com/CumulusNetworks/ifupdown2/issues/30#issuecomment-360589850
+- name: Install fixed networking.service file
+  copy: src=networking.service dest=/lib/systemd/system/networking.service
+  notify: Reload systemd
+
 - name: Configure mesh interfaces
   template: src=mesh.conf.j2 dest=/etc/network/interfaces.d/mesh.conf
   notify: Reload interfaces
