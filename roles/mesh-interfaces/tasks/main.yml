@@ -10,9 +10,9 @@
   apt: name=ifupdown state=absent
 
 - name: Configure mesh interfaces
-  template: src=mesh.conf.j2 dest=/etc/network/interfaces.d/mesh.conf backup=yes
+  template: src=mesh.conf.j2 dest=/etc/network/interfaces.d/mesh.conf
   notify: Reload interfaces
 
 - name: Configure backbone interfaces
-  template: src=backbone.conf.j2 dest=/etc/network/interfaces.d/backbone.conf backup=yes
+  template: src=backbone.conf.j2 dest=/etc/network/interfaces.d/backbone.conf
   notify: Reload interfaces
