@@ -1,0 +1,8 @@
+---
+
+- name: Deploy Admin Keys from vault_root_sshkeys
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ item }}"
+  with_items: "{{ vault_root_sshkeys }}"
