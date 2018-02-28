@@ -1,0 +1,10 @@
+[Unit]
+Description=Confluence
+After=network.target
+
+[Service]
+ExecStart=/bin/su confluence /opt/atlassian-confluence/bin/start-confluence.sh
+ExecStop=/bin/su confluence /opt/atlassian-confluence/bin/stop-confluence.sh
+
+[Install]
+WantedBy=multi-user.target

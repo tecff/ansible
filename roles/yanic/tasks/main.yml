@@ -21,7 +21,7 @@
     - "{{ yanic_meshviewer_path }}"
     - /var/lib/yanic
 
-- name: Install system unit
+- name: Install systemd unit
   copy: src=yanic.service dest=/lib/systemd/system/yanic.service
   notify:
     - Reload systemd

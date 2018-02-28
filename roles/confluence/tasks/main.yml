@@ -6,6 +6,10 @@
   - postgresql
   - python-psycopg2
 
+- name: Install systemd unit
+  copy: src=confluence.service dest=/lib/systemd/system/confluence.service
+  notify: Reload systemd
+
 - name: Configure PostgreSQL database
   postgresql_db: name={{ confluence_dbname }}
   become: true
