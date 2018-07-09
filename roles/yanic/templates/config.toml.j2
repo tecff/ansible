@@ -7,13 +7,8 @@ synchronize      = "{{ yanic_respondd_synchronize_interval }}"
 [respondd.sites.ffrgb]
 domains            = ["{{ site_code }}"]
 
-# interface that has an IP in your mesh network
 [[respondd.interfaces]]
 ifname = "br-{{ site_code }}"
-#ip_address = "{{ batman_ipv6 | ipaddr('address') }}"
-#send_no_request = false
-#multicast_address = "ff05::2:1001"
-#port = 10001
 
 [webserver]
 enable  = {{ yanic_webserver | ternary('true','false') }}
@@ -86,5 +81,5 @@ type     = "udp6"
 address  = "{{ yanic_repondd_remotehost }}"
 
 [[database.connection.logging]]
-enable   = true
+enable   = false
 path     = "/var/log/yanic.log"
