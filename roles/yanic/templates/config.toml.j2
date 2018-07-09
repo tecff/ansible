@@ -2,8 +2,18 @@
 [respondd]
 enable           = {{ yanic_respondd | ternary('true','false') }}
 collect_interval = "{{ yanic_respondd_collect_interval }}"
-interfaces       = ["{{ yanic_respondd_interface }}"]
-sites            = []
+synchronize      = "{{ yanic_respondd_synchronize_interval }}"
+
+[respondd.sites.ffrgb]
+domains            = ["{{ site_code }}"]
+
+# interface that has an IP in your mesh network
+[[respondd.interfaces]]
+ifname = "br-{{ site_code }}"
+#ip_address = "{{ batman_ipv6 | ipaddr('address') }}"
+#send_no_request = false
+#multicast_address = "ff05::2:1001"
+#port = 10001
 
 [webserver]
 enable  = {{ yanic_webserver | ternary('true','false') }}
@@ -20,11 +30,33 @@ offline_after  = "{{ yanic_nodes_offline_after }}"
 enable  = {{ yanic_meshviewer_ffrgb_enable | ternary('true','false') }}
 path    = "{{ yanic_meshviewer_ffrgb_path }}"
 
+[nodes.output.meshviewer-ffrgb.filter]
+no_owner = true
+blacklist = []
+sites = ["ffrgb"]
+has_location = true
+
+#[nodes.output.meshviewer-ffrgb.filter.in_area]
+#latitude_min = 34.30
+#latitude_max = 71.85
+#longitude_min = -24.96
+#longitude_max = 39.72
+
 [[nodes.output.meshviewer]]
 enable         = {{ yanic_meshviewer_enable | ternary('true','false') }}
 version        = {{ yanic_meshviewer_version }}
 nodes_path     = "{{ yanic_meshviewer_nodes }}"
 graph_path     = "{{ yanic_meshviewer_graph }}"
+
+[nodes.output.meshviewer.filter]
+no_owner = true
+
+[[nodes.output.nodelist]]
+enable   = false
+path = "/var/www/html/meshviewer/data/nodelist.json"
+
+[nodes.output.nodelist.filter]
+no_owner = true
 
 [database]
 delete_after = "{{ yanic_database_delete_after }}"
@@ -47,3 +79,12 @@ enable   = {{ db.enable | ternary('true','false') }}
 address  = "{{ db.address }}"
 prefix   = "{{ db.prefix }}"
 {% endfor %}
+
+[[database.connection.respondd]]
+enable   = {{ yanic_repondd_enable | ternary('true','false') }}
+type     = "udp6"
+address  = "{{ yanic_repondd_remotehost }}"
+
+[[database.connection.logging]]
+enable   = true
+path     = "/var/log/yanic.log"

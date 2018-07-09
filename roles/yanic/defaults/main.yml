@@ -3,6 +3,7 @@
 yanic_publisher: false
 yanic_respondd: true
 yanic_respondd_collect_interval: "1m"
+yanic_respondd_synchronize_interval: "1m"
 yanic_respondd_interface: "br-{{ site_code }}"
 
 yanic_webserver: false
@@ -27,8 +28,11 @@ yanic_meshviewer_graph: "{{yanic_meshviewer_path}}/graph.json"
 yanic_database_delete_after: "7d"
 yanic_database_delete_interval: "1h"
 
+yanic_repondd_enable: true
+yanic_repondd_remotehost: "[2a01:4f8:173:2919::2]:10001"
+
 yanic_influxdb:
-- enable: true
+- enable: false
   host: http://88.99.2.28:8086
   database: ffrgb
   username: ""

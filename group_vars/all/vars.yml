@@ -31,4 +31,5 @@ ntp_servers:
 - 2.de.pool.ntp.org
 - 3.de.pool.ntp.org
 
+site: ffrgb
 site_domain: regensburg.freifunk.net
