@@ -8,7 +8,7 @@ synchronize      = "{{ yanic_respondd_synchronize_interval }}"
 domains            = ["{{ site_code }}"]
 
 [[respondd.interfaces]]
-ifname = "br-{{ site_code }}"
+ifname = "{{ yanic_respondd_interface }}"
 
 [webserver]
 enable  = {{ yanic_webserver | ternary('true','false') }}
@@ -28,7 +28,7 @@ path    = "{{ yanic_meshviewer_ffrgb_path }}"
 [nodes.output.meshviewer-ffrgb.filter]
 no_owner = true
 blacklist = []
-sites = ["ffrgb"]
+sites = ["{{ site }}"]
 has_location = true
 
 #[nodes.output.meshviewer-ffrgb.filter.in_area]
