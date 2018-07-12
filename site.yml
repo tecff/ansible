@@ -6,6 +6,7 @@
   - common
   - apt
   - ntp
+  - node_exporter
 
 - name: Setup gateway servers
   hosts: [gw11.regensburg.freifunk.net, gw21.regensburg.freifunk.net, gw31.regensburg.freifunk.net]

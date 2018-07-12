@@ -3,8 +3,4 @@ gw11.regensburg.freifunk.net
 gw21.regensburg.freifunk.net
 gw31.regensburg.freifunk.net
 confluence.regensburg.freifunk.net
-
-[gw]
-gw11.regensburg.freifunk.net
-gw21.regensburg.freifunk.net
-gw31.regensburg.freifunk.net
+unms.ffrgb ansible_host=10.90.224.101

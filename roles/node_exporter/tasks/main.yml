@@ -1,0 +1,19 @@
+---
+
+- name: Create user
+  user: name=node_exporter
+
+- name: Unpack node_exporter
+  unarchive: src="{{ node_exporter_url }}" remote_src=yes dest=/opt/ creates=/opt/node_exporter-{{ node_exporter_version }}.linux-amd64/node_exporter
+
+- name: Configure node_exporter
+  copy: src=node_exporter dest=/etc/default/node_exporter
+
+- name: Install systemd unit
+  template: src=node_exporter.service.j2 dest=/lib/systemd/system/node_exporter.service
+  notify:
+  - Reload systemd
+  - Restart node_exporter
+
+- name: Enable node_exporter
+  service: name=node_exporter enabled=yes
