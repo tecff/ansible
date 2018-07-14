@@ -21,7 +21,9 @@ server {
 	location /firmware-ng/experimental {
 		proxy_pass https://home.mephis.to/ff/experimental/images;
 	}
-
+        location /firmware-ng/stable {
+                proxy_pass https://home.mephis.to/ff/stable/images;
+        }
 }
 
 server {
