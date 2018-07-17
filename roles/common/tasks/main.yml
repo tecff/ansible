@@ -15,6 +15,10 @@
   - vim-nox
   - zsh
 
+- name: Install qemu-agent on KVM VMs
+  apt: name=qemu-guest-agent
+  when: ansible_virtualization_role == "guest" and ansible_virtualization_type == "kvm"
+
 - name: Configure misc software
   copy: src={{ item.src }} dest={{ item.dest }}
   with_items:
@@ -26,3 +30,13 @@
 
 - name: Set shell for root user
   user: name=root shell=/bin/zsh
+
+- name: Disable hibernation/resume
+  copy: src=resume dest=/etc/initramfs-tools/conf.d/resume
+  notify: update-initramfs
+
+- name: Prevent normal users from running su
+  lineinfile:
+    path: /etc/pam.d/su
+    regexp: '^.*auth\s+required\s+pam_wheel.so$'
+    line: 'auth       required   pam_wheel.so'
