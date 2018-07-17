@@ -1,6 +1,6 @@
 ---
 
-- name: Create users
+- name: Create user
   user: name=yanic
 
 - name: Install yanic
