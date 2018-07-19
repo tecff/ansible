@@ -29,3 +29,9 @@
   hosts: confluence.regensburg.freifunk.net
   roles:
   - confluence
+
+- name: Setup stats server
+  hosts: stats.ffrgb
+  roles:
+  - prometheus
+  - grafana

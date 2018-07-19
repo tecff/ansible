@@ -1,0 +1,10 @@
+---
+
+- name: Enable grafana apt-key
+  apt_key: url='https://packagecloud.io/gpg.key'
+
+- name: Enable grafana repository
+  apt_repository: repo='deb https://packagecloud.io/grafana/stable/debian/ stretch main'
+
+- name: Install grafana
+  apt: name=grafana

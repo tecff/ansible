@@ -25,6 +25,14 @@ gre_matrix:
  - { id: 26, a: gw21, b: gw31 }
 # - { id: 33, a: gw22, b: gw31 }
 
+node_targets:
+- gw11.regensburg.freifunk.net:9100
+- gw21.regensburg.freifunk.net:9100
+- gw31.regensburg.freifunk.net:9100
+- confluence.regensburg.freifunk.net:9100
+- stats.ffrgb:9100
+- unms.ffrgb:9100
+
 ntp_servers:
 - 0.de.pool.ntp.org
 - 1.de.pool.ntp.org

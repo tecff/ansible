@@ -1,0 +1,14 @@
+---
+
+- name: Enable backports for prometheus
+  apt_repository: repo='deb http://httpredir.debian.org/debian stretch-backports main'
+
+- name: Install prometheus
+  apt: name=prometheus default_release='stretch-backports'
+
+- name: Configure prometheus
+  template: src=prometheus.yml.j2 dest=/etc/prometheus/prometheus.yml
+  notify: Restart prometheus
+
+- name: Enable prometheus
+  service: name=prometheus enabled=yes
