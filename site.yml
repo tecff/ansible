@@ -11,18 +11,19 @@
 - name: Setup gateway servers
   hosts: [gw11.regensburg.freifunk.net, gw21.regensburg.freifunk.net, gw31.regensburg.freifunk.net]
   roles:
-   - gw-admin-ssh-keys
-   - batman
-   - bird
-   - fastd
-   - mesh-interfaces
-   - exit-ipv4
-   - dns
-   - radvd
-   - dhcpd
-   - respondd
-   - yanic
-   - web-gw
+  - gw-admin-ssh-keys
+  - arp-cache
+  - batman
+  - bird
+  - fastd
+  - mesh-interfaces
+  - exit-ipv4
+  - dns
+  - radvd
+  - dhcpd
+  - respondd
+  - yanic
+  - web-gw
 
 - name: Setup confluence server
   hosts: confluence.regensburg.freifunk.net
