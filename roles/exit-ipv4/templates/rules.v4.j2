@@ -9,5 +9,6 @@ COMMIT
 *filter
 :INPUT ACCEPT [1124:131621]
 :FORWARD ACCEPT [0:0]
+-A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 :OUTPUT ACCEPT [1151:175226]
 COMMIT
