@@ -6,7 +6,7 @@ interface br-{{ site_code }} {
   AdvManagedFlag off;
   AdvOtherConfigFlag on;
   MaxRtrAdvInterval 200;
-  AdvLinkMTU {{ mtu }};
+  AdvLinkMTU {{ (mtu | int) - 32 }};
   prefix {{ batman_ipv6 | ipaddr('address') | ipsubnet(64) }} {
     AdvOnLink on;
     AdvAutonomous on;
