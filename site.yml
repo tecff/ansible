@@ -17,7 +17,7 @@
   - bird
   - fastd
   - mesh-interfaces
-  - exit-ipv4
+  - exit-ip
   - dns
   - radvd
   - dhcpd

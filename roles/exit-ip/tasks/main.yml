@@ -18,3 +18,7 @@
 - name: Configure iptables
   template: src=rules.v4.j2 dest=/etc/iptables/rules.v4
   notify: Reload iptables
+
+- name: Configure ip6tables
+  template: src=rules.v6.j2 dest=/etc/iptables/rules.v6
+  notify: Reload ip6tables
