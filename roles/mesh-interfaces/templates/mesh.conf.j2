@@ -27,6 +27,7 @@ iface bat-{{ site_code }}
 	#
 	up /usr/sbin/batctl -m bat-{{ site_code }} gw_mode server 100000 100000
 	up /usr/sbin/batctl -m bat-{{ site_code }} it 5000
+	up /usr/sbin/batctl -m bat-{{ site_code }} multicast_mode 0
 	up /usr/sbin/batctl -m bat-{{ site_code }} ra {{ batman_algo }}
 
 # dmy-{{ site_code }}
