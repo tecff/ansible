@@ -14,7 +14,7 @@ The *only* supported distribution to deploy roles on is debian stretch.
 
 To deploy all defined roles on all servers simply run `ansible-playbook site.yml`.
 
-To deploy only one server run `ansible-playbook -i "hostname," site.yml`.
+To deploy only one server run `ansible-playbook -l hostname site.yml`.
 
 
 ## Notes
