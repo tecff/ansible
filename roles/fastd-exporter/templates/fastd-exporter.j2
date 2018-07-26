@@ -1,1 +1,1 @@
-OPTIONS="-metrics.perpeer -instances {{ site_code }}{{ range(fastd_instances)|join(',' + site_code) }}"
+OPTIONS="-instances {{ site_code }}{{ range(fastd_instances)|join(',' + site_code) }}"

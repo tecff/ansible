@@ -1,8 +1,5 @@
 ---
 
-- name: Create user
-  user: name=fastd-exporter
-
 - name: Install fastd-exporter
   shell: /usr/local/go/bin/go get -v -u {{ fastd_exporter_source }}
   args:

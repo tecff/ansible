@@ -1,5 +1,11 @@
 ---
 
+- name: Create group
+  group: name=fastd
+
+- name: Create user
+  user: name=fastd group=fastd
+
 - name: Install fastd
   apt: name=fastd state=latest
 
@@ -15,12 +21,15 @@
 - name: Disable fastd default instance
   service: name=fastd enabled=no
 
-- name: Create directories
+- name: Create config directory
   file: path=/etc/fastd/{{ site_code }} state=directory
 
-- name: Create directories
+- name: Create config directories
   file: path=/etc/fastd/{{ site_code }}{{ item }}/peers state=directory
   with_sequence: start=0 count={{ fastd_instances }}
+
+- name: Create socket directory
+  file: path=/run/fastd owner=fastd group=fastd state=directory
 
 - name: Configure fastd
   template: src=fastd.conf.j2 dest=/etc/fastd/{{ site_code }}{{ item }}/fastd.conf
@@ -30,6 +39,9 @@
 - name: Generate fastd secret
   fastd_key: path=/etc/fastd/{{ site_code }}/secret.conf
   notify: Restart fastd
+
+- name: Permissions (secret)
+  file: owner=fastd group=fastd path=/etc/fastd/{{ site_code }}/secret.conf
 
 - name: Create symlinks (secret)
   file: src=/etc/fastd/{{ site_code }}/secret.conf dest=/etc/fastd/{{ site_code }}{{ item }}/secret.conf state=link

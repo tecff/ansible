@@ -1,8 +1,11 @@
 # {{ ansible_managed }}
 
+user "fastd";
+group "fastd";
+
 log to syslog level warn;
 hide ip addresses yes;
-status socket "/run/fastd-{{ site_code }}{{ item }}.sock";
+status socket "/run/fastd/{{ site_code }}{{ item }}.sock";
 
 interface "vpn-{{ site_code }}{{ item }}";
 

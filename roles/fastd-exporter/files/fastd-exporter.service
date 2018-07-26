@@ -3,7 +3,7 @@ Description=fastd Exporter
 
 [Service]
 Type=simple
-User=fastd-exporter
+User=fastd
 Environment=PATH=/usr/bin:/usr/local/bin
 EnvironmentFile=/etc/default/fastd-exporter
 ExecStart=/opt/go/bin/fastd-exporter $OPTIONS
