@@ -1,0 +1,4 @@
+---
+
+fastd_instances: 3
+fastd_exporter_source: "github.com/freifunk-darmstadt/fastd-exporter"

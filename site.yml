@@ -16,6 +16,7 @@
   - batman
   - bird
   - fastd
+  - fastd-exporter
   - mesh-interfaces
   - exit-ip
   - dns

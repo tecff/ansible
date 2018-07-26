@@ -1,0 +1,25 @@
+---
+
+- name: Create user
+  user: name=fastd-exporter
+
+- name: Install fastd-exporter
+  shell: /usr/local/go/bin/go get -v -u {{ fastd_exporter_source }}
+  args:
+    creates: /opt/go/bin/fastd-exporter
+  environment:
+    GOPATH: /opt/go
+  notify: Restart fastd-exporter
+
+- name: Configure fastd-exporter
+  template: src=fastd-exporter.j2 dest=/etc/default/fastd-exporter
+  notify: Restart fastd-exporter
+
+- name: Install systemd unit
+  copy: src=fastd-exporter.service dest=/lib/systemd/system/fastd-exporter.service
+  notify:
+  - Reload systemd
+  - Restart fastd-exporter
+
+- name: Enable fastd-exporter
+  service: name=fastd-exporter state=started enabled=yes

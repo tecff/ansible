@@ -1,0 +1,7 @@
+---
+
+- name: Restart fastd-exporter
+  service: name=fastd-exporter state=restarted
+
+- name: Reload systemd
+  command: systemctl daemon-reload
