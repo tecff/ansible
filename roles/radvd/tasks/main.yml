@@ -1,18 +1,11 @@
 ---
 
 - name: Install radvd
-  apt: name={{ item }}
-  with_items:
-   - radvd
+  apt: name=radvd
 
 - name: Configure radvd
-  template: src={{ item }}.j2 dest=/etc/{{ item }}
-  tags: radvd
+  template: src=radvd.j2 dest=/etc/radvd
   notify: Restart radvd
-  with_items:
-   - radvd.conf
 
 - name: Start the radvd service
-  service: name={{ item }} state=started enabled=yes
-  with_items:
-   - radvd
+  service: name=radvd state=started enabled=yes

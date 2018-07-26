@@ -14,4 +14,4 @@
   - Restart respondd
 
 - name: Enable respondd
-  service: name=respondd enabled=yes
+  service: name=respondd state=started enabled=yes

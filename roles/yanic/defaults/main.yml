@@ -1,10 +1,12 @@
 ---
 
+yanic_source: github.com/ffrgb/yanic
+
 yanic_publisher: false
 yanic_respondd: true
-yanic_respondd_collect_interval: "1m"
-yanic_respondd_synchronize_interval: "1m"
-yanic_respondd_interface: "br-{{ site_code }}"
+yanic_respondd_collect_interval: 1m
+yanic_respondd_synchronize_interval: 1m
+yanic_respondd_interface: br-{{ site_code }}
 
 yanic_webserver: false
 yanic_webserver_bind: "127.0.0.1:8080"
@@ -12,9 +14,9 @@ yanic_webserver_webroot: "/var/www/html/meshviewer"
 
 yanic_nodes: true
 yanic_nodes_state_path: "/var/lib/yanic/yanic.json"
-yanic_nodes_save_interval: "5s"
-yanic_nodes_offline_after: "10m"
-yanic_nodes_prune_after: "7d"
+yanic_nodes_save_interval: 5s
+yanic_nodes_offline_after: 10m
+yanic_nodes_prune_after: 7d
 
 yanic_meshviewer_ffrgb_enable: true
 yanic_meshviewer_ffrgb_path: "/var/www/html/meshviewer/data/meshviewer.json"
@@ -25,8 +27,8 @@ yanic_meshviewer_path: "/var/www/html/meshviewer/data"
 yanic_meshviewer_nodes: "{{yanic_meshviewer_path}}/nodes.json"
 yanic_meshviewer_graph: "{{yanic_meshviewer_path}}/graph.json"
 
-yanic_database_delete_after: "7d"
-yanic_database_delete_interval: "1h"
+yanic_database_delete_after: 7d
+yanic_database_delete_interval: 1h
 
 yanic_repondd_enable: true
 yanic_repondd_remotehost: "[2a01:4f8:173:2919::2]:10001"

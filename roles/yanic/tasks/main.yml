@@ -4,7 +4,7 @@
   user: name=yanic
 
 - name: Install yanic
-  shell: /usr/local/go/bin/go get -v -u github.com/ffrgb/yanic
+  shell: /usr/local/go/bin/go get -v -u {{ yanic_source }}
   args:
     creates: /opt/go/bin/yanic
   environment:
@@ -18,14 +18,14 @@
 - name: Create directories
   file: path={{ item }}/ state=directory owner=yanic
   with_items:
-    - "{{ yanic_meshviewer_path }}"
-    - /var/lib/yanic
+  - "{{ yanic_meshviewer_path }}"
+  - /var/lib/yanic
 
 - name: Install systemd unit
   copy: src=yanic.service dest=/lib/systemd/system/yanic.service
   notify:
-    - Reload systemd
-    - Restart yanic
+  - Reload systemd
+  - Restart yanic
 
 - name: Enable yanic
   service: name=yanic enabled=yes
