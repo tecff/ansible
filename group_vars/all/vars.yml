@@ -7,6 +7,11 @@ confluence_dbname: confluence
 confluence_dbuser: confluence
 confluence_dbpass: "{{ vault_confluence_dbpass }}"
 
+fastd_targets:
+- gw11.regensburg.freifunk.net:9281
+- gw21.regensburg.freifunk.net:9281
+- gw31.regensburg.freifunk.net:9281
+
 gre_prefix: 10.90.232.0/24
 gre_matrix:
 # - { id: 1, a: svcs, b: gw11 }

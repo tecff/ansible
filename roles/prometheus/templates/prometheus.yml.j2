@@ -31,3 +31,9 @@ scrape_configs:
 {% for target in node_targets %}
         - {{ target }}
 {% endfor %}
+  - job_name: fastd
+    static_configs:
+      - targets:
+{% for target in fastd_targets %}
+        - {{ target }}
+{% endfor %}
