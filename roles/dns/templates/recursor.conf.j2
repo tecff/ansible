@@ -33,6 +33,13 @@ local-address=127.0.0.1,{{ batman_ipv4 | ipaddr('address') }},{{ batman_ipv6 | i
 local-port=53
 
 #################################
+# query-local-address6 Send out local IPv6 queries from this address or addresses. Disabled by default, which also disables outgoing
+#
+{% if global_ipv6 is defined %}
+query-local-address6={{ global_ipv6 | ipaddr('address') }}
+{% endif %}
+
+#################################
 # quiet Suppress logging of questions and answers
 #
 quiet=yes
