@@ -4,12 +4,12 @@
   apt: name={{ item }}
   with_items:
   - git
-  - python-dateutil
-  - python-openssl
+  - python-cryptography
+  - python-dnspython
   - python-yaml
 
 - name: Install acertmgr
-  git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version=017f55f57cb77628061b6a5f4236055c2e4d5f02
+  git: repo=https://github.com/moepman/acertmgr.git dest=/opt/acertmgr depth=1 version={{ acertmgr_version }}
 
 - name: Create config directories
   file: path={{ item }} state=directory mode=0755
@@ -19,21 +19,6 @@
 
 - name: Configure acertmgr
   template: src=acme.conf.j2 dest=/etc/acme/acme.conf
-
-- name: Create private keys
-  command: openssl genrsa -out {{ item }} 4096 creates={{ item }}
-  with_items:
-  - /etc/acme/account.key
-  - /etc/acme/server.key
-
-- name: Ensure private key permissoins
-  file: path={{ item }} owner=root mode=0400
-  with_items:
-  - /etc/acme/account.key
-  - /etc/acme/server.key
-
-- name: Download Lets Encrypt CA certificate
-  get_url: url=https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem dest=/etc/acme/lets-encrypt-x3-cross-signed.pem
 
 - name: Create challenge directory
   file: path=/var/www/acme-challenge/ owner=root mode=0755 state=directory

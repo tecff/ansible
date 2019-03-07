@@ -1,6 +1,6 @@
 ---
 
-certmgr_mode: webserver
+acertmgr_mode: webdir
 
 confluence_domain: confluence.regensburg.freifunk.net
 confluence_dbname: confluence

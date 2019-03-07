@@ -1,9 +1,6 @@
 ---
 
-mode: {{ certmgr_mode }}
+mode: {{ acertmgr_mode }}
 webdir: /var/www/acme-challenge/
 ttl_days: 30
 authority: "https://acme-v01.api.letsencrypt.org"
-
-defaults:
-  cafile: /etc/acme/lets-encrypt-x3-cross-signed.pem
