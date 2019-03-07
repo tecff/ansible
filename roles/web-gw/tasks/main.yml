@@ -9,7 +9,7 @@
 
 - name: Configure certificate manager
   template: src=certs.j2 dest=/etc/acme/domains.d/{{ ansible_fqdn }}.conf
-  notify: Run certmgr
+  notify: Run acertmgr
 
 - name: Configure vhosts
   template: src=vhost.j2 dest=/etc/nginx/sites-available/www

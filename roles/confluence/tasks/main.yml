@@ -26,6 +26,7 @@
 
 - name: Configure certificate manager for confluence
   template: src=certs.j2 dest=/etc/acme/domains.d/{{ confluence_domain }}.conf
+  notify: Run acertmgr
 
 - name: Configure vhost
   template: src=vhost.j2 dest=/etc/nginx/sites-available/confluence

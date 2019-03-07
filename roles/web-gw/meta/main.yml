@@ -1,5 +1,5 @@
 ---
 
 dependencies:
-- { role: certmgr }
+- { role: acertmgr }
 - { role: nginx, nginx_ssl: True }

@@ -5,3 +5,6 @@
 
 - name: Reload systemd
   command: systemctl daemon-reload
+
+- name: Run acertmgr
+  command: /opt/acertmgr/acertmgr.py
