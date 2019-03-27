@@ -28,9 +28,6 @@
   file: path=/etc/fastd/{{ site_code }}{{ item }}/peers state=directory
   with_sequence: start=0 count={{ fastd_instances }}
 
-- name: Create socket directory
-  file: path=/run/fastd owner=fastd group=fastd state=directory
-
 - name: Configure fastd
   template: src=fastd.conf.j2 dest=/etc/fastd/{{ site_code }}{{ item }}/fastd.conf
   with_sequence: start=0 count={{ fastd_instances }}
