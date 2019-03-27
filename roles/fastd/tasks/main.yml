@@ -44,12 +44,18 @@
   file: src=/etc/fastd/{{ site_code }}/secret.conf dest=/etc/fastd/{{ site_code }}{{ item }}/secret.conf state=link
   with_sequence: start=0 count={{ fastd_instances }}
 
-- name: Make sure at least a dummy blacklist.sh is available
+- name: Create Blacklist Script
   copy: src=blacklist.sh dest=/etc/fastd/{{ site_code }}/blacklist.sh mode=0755 force=no
 
 - name: Create symlinks (blacklist)
   file: src=/etc/fastd/{{ site_code }}/blacklist.sh dest=/etc/fastd/{{ site_code }}{{ item }}/blacklist.sh state=link
   with_sequence: start=0 count={{ fastd_instances }}
+
+- name: Create Blacklist directory
+  file: path=/etc/fastd/{{ site_code }}/vpn-blacklist/ state=directory
+
+- name: Create Blacklist file
+  copy: src=blacklist.json dest=/etc/fastd/{{ site_code }}/vpn-blacklist/blacklist.sh mode=0755
 
 - name: Enable fastd {{ site_code }}
   service: name=fastd@{{ site_code }}{{ item }} enabled=yes
