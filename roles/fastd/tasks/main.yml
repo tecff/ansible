@@ -55,7 +55,7 @@
   file: path=/etc/fastd/{{ site_code }}/vpn-blacklist/ state=directory
 
 - name: Create Blacklist file
-  copy: src=blacklist.json dest=/etc/fastd/{{ site_code }}/vpn-blacklist/blacklist.json mode=0755
+  copy: src=blacklist.json dest=/etc/fastd/{{ site_code }}/vpn-blacklist/blacklist.json mode=0644
 
 - name: Enable fastd {{ site_code }}
   service: name=fastd@{{ site_code }}{{ item }} enabled=yes
