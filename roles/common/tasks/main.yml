@@ -15,6 +15,7 @@
   - sudo
   - vim-nox
   - zsh
+  - fail2ban
 
 - name: Install qemu-agent on KVM VMs
   apt: name=qemu-guest-agent
