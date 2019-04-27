@@ -38,7 +38,7 @@ on down "
 ";
 
 {% if fastd_anonymous %}
-on verify "/etc/fastd/{{ site_code }}/blacklist.sh $PEER_KEY $PEER_ADDRESS /opt/{{ site_code }}/vpn-blacklist/blacklist.json";
+on verify "/etc/fastd/{{ site_code }}/blacklist.sh $PEER_KEY $PEER_ADDRESS /etc/fastd/{{ site_code }}/vpn-blacklist/blacklist.json";
 {% endif %}
 
 include peers from "peers";
