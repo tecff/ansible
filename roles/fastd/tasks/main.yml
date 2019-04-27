@@ -45,7 +45,7 @@
   with_sequence: start=0 count={{ fastd_instances }}
 
 - name: Create Blacklist Script
-  copy: src=blacklist.sh dest=/etc/fastd/{{ site_code }}/blacklist.sh mode=0755 force=no
+  copy: src=blacklist.sh dest=/etc/fastd/{{ site_code }}/blacklist.sh mode=0755 force=yes
 
 - name: Create symlinks (blacklist)
   file: src=/etc/fastd/{{ site_code }}/blacklist.sh dest=/etc/fastd/{{ site_code }}{{ item }}/blacklist.sh state=link

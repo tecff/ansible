@@ -5,6 +5,6 @@ if /bin/grep -Fq $PEER_KEY /opt/ffrgb_cty/vpn-blacklist/blacklist.json; then
     echo "BANNED KEY: $PEER_KEY $PEER_ADDRESS"
     exit 1
 else
-    echo "CLEAN KEY: $PEER_KEY "
+    echo "CLEAN KEY: $PEER_KEY $PEER_ADDRESS"
     exit 0
 fi
