@@ -8,6 +8,8 @@
 COMMIT
 *filter
 :INPUT ACCEPT [1124:131621]
+-A INPUT -p udp -m multiport -i br-{{ site_code }} --destination-ports {{ fastd_port }}:{{ fastd_port + (fastd_instances-1) }} -j LOG --log-prefix "vpn-int-loop-" -m limit --limit 5/min
+-A INPUT -p udp -m multiport -i br-{{ site_code }} --destination-ports {{ fastd_port }}:{{ fastd_port + (fastd_instances-1) }} -j REJECT
 :FORWARD ACCEPT [0:0]
 -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 :OUTPUT ACCEPT [1151:175226]
