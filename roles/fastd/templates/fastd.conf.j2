@@ -22,7 +22,13 @@ include "secret.conf";
 mtu {{ mtu }};
 
 {% if fastd_peers_limit > -1 %}
+	{% if item|int == 0 %}
+peer limit {{ fastd_peers_limit-10 }};
+	{% elif item|int == (fastd_instances-1) %}
+peer limit {{ fastd_peers_limit+10 }};
+	{% else %}
 peer limit {{ fastd_peers_limit }};
+	{% endif %}
 {% endif %}
 
 on up "
