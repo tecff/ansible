@@ -3,11 +3,9 @@
 acertmgr_mode: webdir
 
 fastd_targets:
-- gw11.regensburg.freifunk.net:9281
-- gw21.regensburg.freifunk.net:9281
-- gw31.regensburg.freifunk.net:9281
+- gwxx.PLACEHOLDER.DOMAIN:9281
 
-gre_prefix: 10.90.232.0/24
+gre_prefix: 10.X.Y.Z/24
 gre_matrix:
 # - { id: 1, a: svcs, b: gw11 }
 # - { id: 2, a: svcs, b: gw12 }
@@ -26,11 +24,7 @@ gre_matrix:
 # - { id: 33, a: gw22, b: gw31 }
 
 node_targets:
-- gw11.regensburg.freifunk.net:9100
-- gw21.regensburg.freifunk.net:9100
-- gw31.regensburg.freifunk.net:9100
-- stats.ffrgb:9100
-- unms.ffrgb:9100
+- gwXX.PLACEHOLDER.DOMAIN:9100
 
 ntp_servers:
 - 0.de.pool.ntp.org
@@ -38,5 +32,5 @@ ntp_servers:
 - 2.de.pool.ntp.org
 - 3.de.pool.ntp.org
 
-site: ffrgb
-site_domain: regensburg.freifunk.net
+site: PLACEHOLDER
+site_domain: PLACEHOLDER.DOMAIN

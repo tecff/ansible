@@ -9,7 +9,7 @@
   - node_exporter
 
 - name: Setup gateway servers
-  hosts: [gw11.regensburg.freifunk.net, gw21.regensburg.freifunk.net, gw31.regensburg.freifunk.net, gw12.regensburg.freifunk.net, gw22.regensburg.freifunk.net]
+  hosts: PLACEHOLDER
   roles:
   - gw-admin-ssh-keys
   - arp-cache
@@ -26,8 +26,8 @@
   - yanic
   - web-gw
 
-- name: Setup stats server
-  hosts: stats.ffrgb
-  roles:
-  - prometheus
-  - grafana
+---- name: Setup stats server
+---  hosts: stats.ffrgb
+---  roles:
+---  - prometheus
+---  - grafana
