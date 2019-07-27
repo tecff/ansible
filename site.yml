@@ -9,7 +9,7 @@
   - node_exporter
 
 - name: Setup gateway servers
-  hosts: PLACEHOLDER
+  hosts: host03.tecff.de
   roles:
   - gw-admin-ssh-keys
   - arp-cache

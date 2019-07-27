@@ -32,5 +32,5 @@ ntp_servers:
 - 2.de.pool.ntp.org
 - 3.de.pool.ntp.org
 
-site: PLACEHOLDER
+site: tecff
 site_domain: PLACEHOLDER.DOMAIN
