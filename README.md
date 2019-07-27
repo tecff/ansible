@@ -1,4 +1,4 @@
-Ansible Freifunk Regensburg
+tecff Ansible
 ===========================
 
 ## Requirements
@@ -19,4 +19,5 @@ To deploy only one server run `ansible-playbook -l hostname site.yml`.
 
 ## Notes
 
+This is a fork of a repository from Freifunk Regensburg e.V. : https://git.binary-kitchen.de/FF-RGB/ansible
 Some roles are derived from https://github.com/FreifunkBremen/ansible/
